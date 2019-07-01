@@ -16,6 +16,18 @@ export default class Main extends React.Component {
     password: '123',
   }
 
+  _handlePress = async () => {
+
+    const {username, password} = this.state;
+    if (username === '' || password === '') {
+      return
+    }
+    const account = await global.web3.eth.accounts.create();
+
+    console.log('account.privateKey', account.privateKey)
+
+  }
+
   _next = () => {
     this.props.navigation.navigate('Select')
   }
@@ -40,7 +52,7 @@ export default class Main extends React.Component {
 
         <ColorButton
           text={' Create Account '}
-          onPress={() => {}}/>
+          onPress={() => this._handlePress()}/>
 
         <ColorButton
           text={' NextPage '}
