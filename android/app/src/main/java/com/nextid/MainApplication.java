@@ -3,6 +3,7 @@ package com.nextid;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.peel.react.TcpSocketsModule;
 import com.tradle.react.UdpSocketsModule;
 import com.peel.react.rnos.RNOSModule;
@@ -27,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNGestureHandlerPackage(),
             new TcpSocketsModule(),
             new UdpSocketsModule(),
             new RNOSModule(),
