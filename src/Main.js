@@ -3,6 +3,7 @@ import {Text, View, AsyncStorage, SafeAreaView} from "react-native";
 import TextAdd from "./TextAdd";
 import ColorButton from "./ColorButton";
 import {privateToPublic} from 'ethereumjs-util';
+import Crypto from './Crypto';
 
 
 
@@ -31,6 +32,8 @@ export default class Main extends React.Component {
     console.log('privateKey', privateKey)
     const publicKey = privateToPublic(privateKey);
     console.log('publicKey', publicKey.toString())
+
+    const encryptPrivateKey =Crypto.encrypt(password, account.privateKey);
 
   }
 
