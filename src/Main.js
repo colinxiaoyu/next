@@ -2,6 +2,7 @@ import React from "react";
 import {Text, View, AsyncStorage, SafeAreaView} from "react-native";
 import TextAdd from "./TextAdd";
 import ColorButton from "./ColorButton";
+import {privateToPublic} from 'ethereumjs-util';
 
 
 
@@ -25,6 +26,11 @@ export default class Main extends React.Component {
     const account = await global.web3.eth.accounts.create();
 
     console.log('account.privateKey', account.privateKey)
+
+    const privateKey = new Buffer(account.privateKey.substring(2), 'hex');
+    console.log('privateKey', privateKey)
+    const publicKey = privateToPublic(privateKey);
+    console.log('publicKey', publicKey.toString())
 
   }
 
