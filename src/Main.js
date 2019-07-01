@@ -35,6 +35,15 @@ export default class Main extends React.Component {
 
     const encryptPrivateKey =Crypto.encrypt(password, account.privateKey);
 
+    const data = {
+      username: username,
+      password: password,
+      privateKey: Crypto.encrypt(password, account.privateKey),
+      address: account.address,
+      publicKey: publicKey,
+    };
+    console.log('setItem data', data)
+    await AsyncStorage.setItem(username, JSON.stringify(data));
   }
 
   _next = () => {
