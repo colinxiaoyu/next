@@ -2,6 +2,8 @@ import React from 'react';
 import {SafeAreaView, Text, AsyncStorage} from "react-native";
 import TextAdd from "./TextAdd";
 import ColorButton from "./ColorButton";
+import Crypto from './Crypto';
+
 
 export default class Select extends React.Component {
 
@@ -12,7 +14,29 @@ export default class Select extends React.Component {
   state = {
     text: '',
     username: '',
-    password: '',
+  }
+
+  _handlePress = () => {
+    const {username, password} = this.state;
+    AsyncStorage.getItem(username).then((result) => {
+      const data = JSON.parse(result);
+      console.log('getItem data', data);
+      if (data.password === password) {
+        console.log('getItem password', password);
+        const text = Crypto.decrypt(password, data.privateKey);
+        this.setState({
+          text: text,
+        })
+      } else {
+        this.setState({
+          text: 'username or password is error',
+        })
+      }
+    }).catch(()=>{
+      this.setState({
+        text: 'username or password is error',
+      })
+    })
   }
 
 
@@ -26,16 +50,16 @@ export default class Select extends React.Component {
             this.setState({username: text});
           }}
         />
+
         <TextAdd
           title={'password'} placeholder={'please tap in password'}
           onChangeText={(text) => {
             this.setState({password: text});
           }}
         />
-
         <ColorButton
           text={' Get privateKey '}
-          onPress={() => {}}/>
+          onPress={() => {this._handlePress()}}/>
 
         <Text>{text}</Text>
 

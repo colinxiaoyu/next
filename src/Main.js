@@ -31,14 +31,13 @@ export default class Main extends React.Component {
     const privateKey = new Buffer(account.privateKey.substring(2), 'hex');
     console.log('privateKey', privateKey)
     const publicKey = privateToPublic(privateKey);
-    console.log('publicKey', publicKey.toString())
 
     const encryptPrivateKey =Crypto.encrypt(password, account.privateKey);
 
     const data = {
       username: username,
       password: password,
-      privateKey: Crypto.encrypt(password, account.privateKey),
+      privateKey: encryptPrivateKey,
       address: account.address,
       publicKey: publicKey,
     };
